@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>book.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="2021%E5%B9%B4%E3%81%AB%E5%85%A5%E6%89%8B%E3%81%97%E3%81%9F%E6%9C%AC">2021年に入手した本</h1>
+<ol>
+<li>初めてのマルウェア解析</li>
+<li>オンラインゲームを支える技術</li>
+<li>Knocking on heven's door</li>
+<li>Praise for the Queen's Gambit</li>
+<li>The Sentence is Death</li>
+<li>プログラミング意味論</li>
+<li>英語で読む高校世界史</li>
+<li>セキュリティエンジニアのための機械学習</li>
+<li>C実践プログラミング</li>
+<li>Ruby on Rails 5 アプリケーションプログラミング</li>
+<li>全ての概念はKan拡張である</li>
+<li>Juliaプログラミング</li>
+<li>圏論の技法</li>
+<li>プログラミングElm</li>
+<li>Short Coding Thecknique</li>
+<li>浜村渚の計算ノート 10冊</li>
+<li>BERTによる自然言語処理入門</li>
+<li>Effective C++ Third Edition</li>
+<li>ゼロからのOS自作入門</li>
+<li>英単語語源図鑑</li>
+<li>すべての悩みは量が解決する! 英語多読</li>
+<li>TOEIC L&amp;R テスト 究極の模試</li>
+<li>基礎数学5 多様体の基礎</li>
+<li>Automated Deduction in Geometry</li>
+<li>TOEIC L&amp;R TEST 出る単特急 金のフレーズ</li>
+<li>1駅1題 TOEIC L&amp;R TEST 文法特急</li>
+<li>Intoroduction to Graph Theory</li>
+<li>Algebra Geometry and Aruthmetic Curves</li>
+<li>圏論による量子計算のモデルと論理</li>
+<li>みんなの圏論</li>
+</ol>
+<h1 id="%E8%A7%A3%E8%AA%AC">解説</h1>
+<blockquote>
+<p>解説する本は積んでいるものであったり、読みかけのモノがあります。</p>
+</blockquote>
+<h2 id="1-%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E8%A7%A3%E6%9E%90">1. 初めてのマルウェア解析</h2>
+<p>この本はMWS Cupの時に読んだ。しかし、前から興味があったので数ヶ月前に購入していた。<br><br>
+興味のあった表層解析の部分はすごくあっさり書かれていた。この本の大部分は静的解析について書かれており、全く知識がないならこの本を読むのは少し難し居であるように感じる。この本の前にGhidra本?と呼ばれる本を読んだ本が幸せかもしれない。<br><br>
+最初の環境構築がラップトップでは少し難しいように思えたのでデスクトップで動かした方がいいであろう。(別にラップトップでも可能である。)</p>
+<h2 id="2-%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E6%94%AF%E3%81%88%E3%82%8B%E6%8A%80%E8%A1%93">2. オンラインゲームを支える技術</h2>
+<p>いつだったか忘れたが寒い時期に購入した気がする。<br><br>
+タイトルにオンラインゲームとあるようにこの本はオンラインゲームに対して焦点を当てられているがゲーム開発に興味のない方でも非常にためになる内容が大量に含まれている。<br><br>
+ネットワークの内容やゲームの歴史や開発体制管理、内部設計、描画の最適化方法など多岐に渡って書かれているので飽きずに読むことができる。
+<br>
+ネットワークについての項目だがネットワークの入門書を軽くでも読んでおいた方が幸せになると思われる。<br><br>
+技術書というより読み物として非常に読んでいて楽しい本の1冊になった</p>
+<h2 id="3-knocking-on-hevens-door">3. Knocking on heven's door</h2>
+<p>積んでるので読めてません。物理の本です。</p>
+<h2 id="4-praise-for-the-queens-gambit">4. Praise for the Queen's Gambit</h2>
+<p>どっかの映画サイトで有名になっていた映画の原作である。おばあちゃんだったかその辺の人の感想が書かれているので映画とは別の視点で見ることもできます。
+特に興味ない人は映像だけでも見てください。</p>
+<h2 id="5-the-sentence-is-death">5. The Sentence is Death</h2>
+<p>イギリスのとある著者によるシリーズものの2冊目である。
+非常に面白かったのであらすじすら教えたくないレベルである。
+なので各自購入して読んでください</p>
+<h2 id="6-%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E6%84%8F%E5%91%B3%E8%AB%96">6. プログラミング意味論</h2>
+<p>どこかのウサギの先輩が読んでいてこの本を知った。
+この本の購入したきっかけは、この本の第5章から圏論を用いて記述されており、圏論の応用先として知りたかったからである。<br><br>
+私自身は、プログラミング意味論などは特に何も知らないのでこの本が事実上の初めての本である。<br>
+この本はまだ感想が述べることができるまで読んでいない。
+この本を読んだらこの記事とは別で感想を書こうと思う。</p>
+<h2 id="7-%E8%8B%B1%E8%AA%9E%E3%81%A7%E8%AA%AD%E3%82%80%E9%AB%98%E6%A0%A1%E4%B8%96%E7%95%8C%E5%8F%B2">7. 英語で読む高校世界史</h2>
+<p>高校では地理選択で世界史のことも日本史のこともよくわからないのでたまたま目についたこの本を購入した。<br>
+おそらく世界史選択の人が使っていた本を英語に翻訳したものである。この本のコンセプトは確か「英語で読めば別の世界が見える。」というようなモノであった気がする。<br><br>
+特にこだわりがないのなら普通に高校の教科書を購入した方がいいであろう。</p>
+<h2 id="8-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92">8.  セキュリティエンジニアのための機械学習</h2>
+<p>1で薄く書かれていた表層解析の部分や機械学習を用いたマルウェア分析について実際に用いることができるデータセットやそれを用いたpythonのコードが見やすい形で乗せられている。<br><br>
+機械学習そのものについての説明（アルゴリズムなど）はそこまで詳しく書かれていないので、その辺をkaggleの有名な本で知識をある程度付けてからこの本を読むと幸せになるであろう。<br>
+この本で一番私が気に入った点は、練習問題がものすごく実践的である事である。<br>
+先ほども述べたが実際に入手できるデータセットがあるのでそれらを用いて分析や分類器を作成できる点である。<br>
+そしてもう1点、この本のおすすめ環境がgoogle colabなのでツヨツヨPCがない人もパソコンにDVしなくて済む。</p>
+<h2 id="9-c%E5%AE%9F%E8%B7%B5%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0">9. C実践プログラミング</h2>
+<p>ひたすら古いc言語のコンパイラを使っているのであたりまえのように記述方法も古い。<br>
+今この本を読む必要性はない気がする。</p>
+<h2 id="10-ruby-on-rails-5-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0">10. Ruby on Rails 5 アプリケーションプログラミング</h2>
+<p>Ruby on Railsを触りたくて入手したが今だこの本を開くことはできていない</p>
+<h2 id="11-%E5%85%A8%E3%81%A6%E3%81%AE%E6%A6%82%E5%BF%B5%E3%81%AFkan%E6%8B%A1%E5%BC%B5%E3%81%A7%E3%81%82%E3%82%8B">11. 全ての概念はKan拡張である</h2>
+<p>あのAlg-d様が出した圏論のpdfが本になったので購入させていただきました。<br>
+元は無料なので、圏論に興味のある人はまずは壱大整域を覗きに行ってきてほしい</p>
+<h2 id="12-julia%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0">12. Juliaプログラミング</h2>
+<p>TwitterでJuliaの文字が増えてきたので実際にどのような言語か知りたかったため購入した<br>
+結論だけ言えば、プログラミングを少しでも触ったことのある人ならば簡単に思える<br>
+完全に、日本語の公式ドキュメントと思った。</p>
+<h2 id="13-%E5%9C%8F%E8%AB%96%E3%81%AE%E6%8A%80%E6%B3%95">13. 圏論の技法</h2>
+<p>加法圏，アーベル圏，三角圏，完全圏，導来圏などについて書かれている本でる。学習本というより辞書感覚である。<br>この本に書かれている圏について知りたいならおすすめの1冊である</p>
+<h2 id="14-%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0elm">14. プログラミングElm</h2>
+<p>Twitterでやっていたどっかの出版社のキャンペーンに当選したのでこの本含め数冊のうち1冊が無量で入手できた。
+なので、この本を入手していただいた<br>
+Elmとはなにかとかから始まるのでElmを知りたいけどどうすればいいかわからないという人はこの本をお勧めする</p>
+<h2 id="15-short-coding-thecknique">15. Short Coding Thecknique</h2>
+<p>この本はタイトルの通りコードゴルフについて書かれた言語である<br>
+コードゴルフとはコードのbyte数を減らしてその少なさを競う謎の遊びである<br>
+もともと興味はあったがそのようにして短くするかを知らなかったのでこの本を購入して非常に良かった<br>
+CとJavaについて書かれていたがこれをきっかけに多くの言語を触るきっかけになった</p>
+<h2 id="16-%E6%B5%9C%E6%9D%91%E6%B8%9A%E3%81%AE%E8%A8%88%E7%AE%97%E3%83%8E%E3%83%BC%E3%83%88-10%E5%86%8A">16. 浜村渚の計算ノート 10冊</h2>
+<p>とあるネットワークが好きな先輩からこの本を2~6巻をもらった。<br>
+1冊目から読みたかったのでamazonで1冊目から最終巻まで購入した。<br>
+普通に小説として面白いと思った本の1冊である。</p>
+<h2 id="17-bert%E3%81%AB%E3%82%88%E3%82%8B%E8%87%AA%E7%84%B6%E8%A8%80%E8%AA%9E%E5%87%A6%E7%90%86%E5%85%A5%E9%96%80">17. BERTによる自然言語処理入門</h2>
+<p>夏休みに機械学習を本格的に触れ、自然言語処理が面白いと感じたのでその当時非常に目に着いた本を購入したことがきっかけである。<br>
+この本しか読んだことないので他の本との比較が難しいが図などがあり文章だけでは難しいと思った所はできるだけわかるように書かれているので非常に助かった。<br>
+この本に使われているコードは実際にgithubに書いてあるのでよくわからないということがあれば直接githubを覗くのも1つの手であろう。</p>
+<h2 id="18-effective-c-third-edition">18. Effective C++ Third Edition</h2>
+<p>雰囲気でc++を書いていたのでc++を勉強できる本を探していたらこの本にたどり着いた。<br>
+この本はまだ最初の方しか読めていないが1から100まで大切なことが書いてある。<br></p>
+<h2 id="19-%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E3%81%AEos%E8%87%AA%E4%BD%9C%E5%85%A5%E9%96%80">19. ゼロからのOS自作入門</h2>
+<p>自作OSに昔から興味があったのでこの本を購入した。<br>
+この本のメインはgithubであると思っているのでワンチャンン本買わなくても何とかなると思う。しかし、概念的なモノは本に記述されているので本は買った方がいい気がする。</p>
+<h2 id="20-%E8%8B%B1%E5%8D%98%E8%AA%9E%E8%AA%9E%E6%BA%90%E5%9B%B3%E9%91%91">20. 英単語語源図鑑</h2>
+<p>表紙が派手で読みたいと思っていたので入手した。<br>
+単語帳というより雑学系の本に近い気がした。</p>
+<h2 id="21-%E3%81%99%E3%81%B9%E3%81%A6%E3%81%AE%E6%82%A9%E3%81%BF%E3%81%AF%E9%87%8F%E3%81%8C%E8%A7%A3%E6%B1%BA%E3%81%99%E3%82%8B-%E8%8B%B1%E8%AA%9E%E5%A4%9A%E8%AA%AD">21. すべての悩みは量が解決する! 英語多読</h2>
+<p>わからなくても読め！調べるな！いつかわかる！みたいな本である。
+これを好きかどうかはさておき一度読むのもありである。</p>
+<h2 id="22-toeic-lr-%E3%83%86%E3%82%B9%E3%83%88-%E7%A9%B6%E6%A5%B5%E3%81%AE%E6%A8%A1%E8%A9%A6">22. TOEIC L&amp;R テスト 究極の模試</h2>
+<p>どっかのゼミで使う予定であったが結局参加出来なかったのでほとんど手を付けていないが基礎が固まった次第の演習書としてもってこいの1冊である。</p>
+<h2 id="23-%E5%9F%BA%E7%A4%8E%E6%95%B0%E5%AD%A65-%E5%A4%9A%E6%A7%98%E4%BD%93%E3%81%AE%E5%9F%BA%E7%A4%8E">23. 基礎数学5 多様体の基礎</h2>
+<p>これも同じくどっかのゼミで使う予定であった。しかし、参加しなかったので積んでいる。</p>
+<h2 id="24-automated-deduction-in-geometry">24. Automated Deduction in Geometry</h2>
+<p>やべぇむずい本です。何言ってるか理解するのに1人だと無限に時間が足りません。</p>
+<h2 id="25-toeic-lr-test-%E5%87%BA%E3%82%8B%E5%8D%98%E7%89%B9%E6%80%A5-%E9%87%91%E3%81%AE%E3%83%95%E3%83%AC%E3%83%BC%E3%82%BA">25. TOEIC L&amp;R TEST 出る単特急 金のフレーズ</h2>
+<p>レベル別にいっぱい単語が載っている。
+toiecでよく出るような単語ばかり収録している気がするのでこれをひたすら回せば単語に関しては問題は多少軽減される気がする。</p>
+<h2 id="26-1%E9%A7%851%E9%A1%8C-toeic-lr-test-%E6%96%87%E6%B3%95%E7%89%B9%E6%80%A5">26. 1駅1題 TOEIC L&amp;R TEST 文法特急</h2>
+<p>toiecの文法問題を解く際のテクニックがいっぱい書いてあるので学習していて飽きなかった。この本は25の本とセットで買うことをお勧めする。</p>
+<h2 id="27-intoroduction-to-graph-theory">27. Intoroduction to Graph Theory</h2>
+<p>積んでいるのでどんな感じの内容が書かれているかわからない。</p>
+<h2 id="28-algebra-geometry-and-aruthmetic-curves">28. Algebra Geometry and Aruthmetic Curves</h2>
+<p>やべぇむずい本です。何言ってるか理解するのに1人だと無限に時間が足りません (part 2)。</p>
+<h2 id="29-%E5%9C%8F%E8%AB%96%E3%81%AB%E3%82%88%E3%82%8B%E9%87%8F%E5%AD%90%E8%A8%88%E7%AE%97%E3%81%AE%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E8%AB%96%E7%90%86">29. 圏論による量子計算のモデルと論理</h2>
+<p>作者の博士論文らしい。前半は圏論的線形代数について記述されており、後半でメインである量子計算について書かれている。<br>
+無限にわからないをしているのでいつ読み終わるか不明である。</p>
+<h2 id="30-%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E5%9C%8F%E8%AB%96">30. みんなの圏論</h2>
+<p>本の紹介を飾るのはこちらの本。<br>
+圏論と言えば数学の怖い人たちがいっぱい図を書いて意味わからないことをしているが、こちらの本は非数学科向けの本なので比較的優しく記述されている。非数学科に圏論を勧める際にはこの本の原著かこの本をお勧めしなければならないほどおすすめである。</p>
+<h1 id="%E6%9C%80%E5%BE%8C%E3%81%AB">最後に</h1>
+<p>2021年度も結構な量の本を入手し読んできた。おすすめ度は文の量を視れば一目瞭然である。<br>
+気になった本があればtwitterかdsicordかどっかで連絡をくれればどんな感じか詳しく教えることができます。
+どんな本が気になったか感想をどっかでくれれば幸いです。</p>
+
+</body>
+</html>
